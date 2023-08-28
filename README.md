@@ -54,7 +54,7 @@ The lack of relation between budget and initial boost in ratings could be for a 
  
 As a movie consumer, it is possible to make one conclusion: if you are looking at IMDB within 90 days of something being released you should mentally subtract ~0.5 from the average rating before using this to decide whether to see it or not.
  
-I'm thinking about what else to do with these data, so feedback is welcome, by email or to @tomstafford
+I'm thinking about what else to do with these data, so feedback is welcome, by email or to [@tomstafford](https://mastodon.online/@tomstafford)
 
 I'm also interested in other large datasets of rating/preference data, so if you work on these please get in touch.
 
