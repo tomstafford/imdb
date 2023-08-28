@@ -1,0 +1,20 @@
+ Can I use IMDb data in my software?
+https://help.imdb.com/article/imdb/general-information/can-i-use-imdb-data-in-my-software/G5JTRESSHJBBHTGX?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=de9c4790-0da4-42eb-81f4-eae1a2add3f4&pf_rd_r=GV7YW2T5G91CS9CBH6R0&pf_rd_s=center-1&pf_rd_t=60601&pf_rd_i=interfaces&ref_=fea_mn_lk1#
+
+Limited non-commercial use of IMDb data is allowed, provided the following conditions are met: 
+
+    You agree to all the terms of our copyright/conditions of use statement.
+    Please also note that IMDb reserves the right to withdraw permission to use the data at any time at our discretion.
+
+    The data must be taken only from the datasets made available (see IMDb Contributor Datasets . You may not use data mining, robots, screen scraping, or similar online data gathering and extraction tools on our website. If the information/data you want is not present in our datasets, it means it's not available for non-commercial usage.
+
+    The data can only be used for personal and non-commercial use and must not be altered/republished/resold/repurposed to create any kind of online/offline database of movie information (except for individual personal use). Please refer to the copyright/license information enclosed in each file for further instructions and limitations on allowed usage.
+
+    You must acknowledge the source of the data by including the following statement:
+
+    Information courtesy of
+    IMDb
+    (https://www.imdb.com).
+    Used with permission.
+
+    We reserve the right to deny any individual request for any reason.
