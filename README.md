@@ -26,7 +26,7 @@ I went to [the-numbers.com](https://www.the-numbers.com/movie/budgets/all) and g
 
 Next I plotted the average rating the movie got on the first time it appeared in the IMDB data, and every day since. Here's the plot
 
-![](plots/average_ratings.png)
+![](plots/average_ratings_ordered.png)
 
 From this you can see two things:
 
@@ -87,4 +87,12 @@ plt.plot(df['days'],df['averageRating'],'-',lw=2,color=moviecolor)
 Without this larger, white, line of you get this plot, compare to the version above to see the difference produces on visual confusion:
 
 ![](plots/average_ratings_noocclusion.png)
+
+### Update 2023-08-30
+
+I realised I could further improve the plot by having the lines layered so earlier releases/longer lines were at the back. Bonus: Barbie is now in pink.
+
+Old plot, for comparison:
+
+![](plots/average_ratings_unordered.png)
 
