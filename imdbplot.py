@@ -23,6 +23,7 @@ Documentation https://developer.imdb.com/non-commercial-datasets/
 '''
 
 SAVEENV = False #toggle, export conda environment
+LOADING = True #toggle, load compiled rating data rather than recompile
 
 # -----------------------------------------------   set up environment
 
@@ -138,39 +139,43 @@ mf = mf.drop(columns=['primaryTitle'])
 #from mf get list of tconst values
 ourmoviecodes = mf['tconst'].tolist()
 
+if LOADING:
+
+    #get list of ratings files
+    files = glob.glob('imdbratings*.tsv.gz')
+
+    rating_df=pd.DataFrame()
 
 
-#get list of ratings files
-files = glob.glob('imdbratings*.tsv.gz')
+    for filename in files:
 
-rating_df=pd.DataFrame()
+        try:
 
+            # unzip .gz file to subdirector /unzipped/
+            os.system('gunzip -c ' + filename + ' > unzipped/' + filename[:-3])
 
-for filename in files:
+            # load unzip tsv file into dataframe
+            df = pd.read_csv('unzipped/' + filename[:-3], sep='\t')
 
-    try:
+            #drop all rows where tconst isn't in our list of movies
+            df = df[df['tconst'].isin(ourmoviecodes)]
 
-        # unzip .gz file to subdirector /unzipped/
-        os.system('gunzip -c ' + filename + ' > unzipped/' + filename[:-3])
+            #extract date from filename, counting from end not the beginning so extra B in somefiles is accounted for
+            date = filename[-17:-7]
 
-        # load unzip tsv file into dataframe
-        df = pd.read_csv('unzipped/' + filename[:-3], sep='\t')
+            df['date'] = date
 
-        #drop all rows where tconst isn't in our list of movies
-        df = df[df['tconst'].isin(ourmoviecodes)]
-
-        #extract date from filename, counting from end not the beginning so extra B in somefiles is accounted for
-        date = filename[-17:-7]
-
-        df['date'] = date
-
-        #append df to rating_df, dropping the index column
-        rating_df = rating_df.append(df, ignore_index=True)
-    except:
-        print('error with file ' + filename)
+            #append df to rating_df, dropping the index column
+            rating_df = rating_df.append(df, ignore_index=True)
+        except:
+            print('error with file ' + filename)
 
 
+    df.to_csv('unzipped/rating_df.csv')
 
+else:
+
+    df=pd.read_csv('rating_df.csv')
 # -----------------------------------------------   plot average ratings over time
 
 
@@ -229,7 +234,7 @@ for movie in ourmoviecodes:
     #add column days prior to most recent
     df['days'] = (df['date'] - latestdate).dt.days
 
-    #plt.plot(df['days'],df['averageRating'],'-',lw=3,color='white')
+    plt.plot(df['days'],df['averageRating'],'-',lw=3,color='white')
     plt.plot(df['days'],df['averageRating'],'-',lw=2,color=moviecolor)   
 
     #annotate right point with title of movie, smaller font
@@ -247,7 +252,7 @@ plt.annotate('CC-BY Tom Stafford 2023', (0.05, 0.06), fontsize=7,color='gray',xy
 plt.xlabel('Days prior to ' + today)
 plt.ylabel('Average IMDB rating')
 
-plt.savefig('plots/average_ratings_noocclusion.png', dpi=450,facecolor='white',bbox_inches="tight")
+plt.savefig('plots/average_ratings.png', dpi=450,facecolor='white',bbox_inches="tight")
 
 
 # -----------------------------------------------   budget bump
